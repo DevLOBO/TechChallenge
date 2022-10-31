@@ -15,7 +15,6 @@ import org.springframework.context.annotation.Configuration;
 import com.challenge.entities.Contract;
 import com.challenge.entities.ContractType;
 import com.challenge.entities.Employee;
-import com.challenge.repositories.ContractRepository;
 import com.challenge.repositories.ContractTypeRepository;
 import com.challenge.repositories.EmployeeRepository;
 
@@ -23,9 +22,6 @@ import com.challenge.repositories.EmployeeRepository;
 public class InitiLoader {
 @Autowired
 private ContractTypeRepository ctr;
-
-@Autowired
-private ContractRepository cr;
 
 @Autowired
 private EmployeeRepository er;
@@ -37,7 +33,7 @@ contractTypes = ctr.saveAll(contractTypes);
 LocalDateTime dt1 = LocalDateTime.now().plusDays(2), dt2 = LocalDateTime.now().plusDays(360);
 Date d1 = Date.from(dt1.atZone(ZoneId.systemDefault()).toInstant()), d2 = Date.from(dt2.atZone(ZoneId.systemDefault()).toInstant());
 Contract contract = new Contract(d1, d2, new BigDecimal(967.32), contractTypes.get(0));
-Employee employee = new Employee("HEHF971110TC3", "Franco", "Hernandez", new Date(97, 10, 10), "franco@hernandez.com", "5560666173", contract);
+Employee employee = new Employee("HEHF971110TC3", "Franco", "Hernandez", new Date(), "franco@hernandez.com", "5560666173", contract);
 employee.getContract().setEmployee(employee);
 er.save(employee);
     }

@@ -1,7 +1,9 @@
 package com.challenge.commons.exceptions;
 
 public class ContractInactiveOrNullException extends RuntimeException {
-    public ContractInactiveOrNullException(String message) {
+	private static final long serialVersionUID = -5247154024109469047L;
+
+	public ContractInactiveOrNullException(String message) {
         super(message);
     }
 }
