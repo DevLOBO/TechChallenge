@@ -62,6 +62,6 @@ public class Contract extends Auditable {
 
     public void disable() {
         this.active = false;
-        this.dateFrom = new Date();
+        this.dateTo = new Date();
     }
 }
