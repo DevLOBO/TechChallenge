@@ -1,5 +1,9 @@
 package com.challenge.config;
 
+import java.util.stream.Collectors;
+
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,6 +18,16 @@ import com.challenge.commons.ErrorMessage;
 
 @RestControllerAdvice
 public class ControllerExceptionHandlers {
+@ExceptionHandler(ConstraintViolationException.class)
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+public ResponseEntity<ErrorMessage> handleConstraintViolationException(ConstraintViolationException cve, WebRequest, req) {
+    ErrorMessage error = new ErrorMessage();
+    error.setStatus(HttpStatus.BAD_REQUEST);
+    error.setMessage(cve.getMessage());
+    error.setErrors(cve.getConstraintViolations().stream().map(ex -> ex.getMessage()).collect(Collectors.toList()));
+    return new ResponseEntity<ErrorMessage>(error, HttpStatus.BAD_REQUEST);
+}
+
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorMessage> handleNotFoundException(NotFoundException nfe, WebRequest req) {
