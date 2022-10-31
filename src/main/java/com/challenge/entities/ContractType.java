@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.challenge.commons.Auditable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,7 +22,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class ContractType {
+public class ContractType extends Auditable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(nullable=false)

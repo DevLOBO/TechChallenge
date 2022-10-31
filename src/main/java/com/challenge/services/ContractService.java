@@ -46,8 +46,7 @@ public class ContractService implements IContractService {
     }
 
     @Override
-    public void disableContract(String taxIdNumber) throws NotFoundException, ContractInactiveOrNullException {
-    	System.out.println("Estoy en el servicio");	
+    public void disableContract(String taxIdNumber) throws NotFoundException, ContractInactiveOrNullException {	
         Employee employee = employeeRepository.findByTaxIdNumber(taxIdNumber).orElseThrow(() -> new NotFoundException("The Tax ID Number doesn't exist"));
         Contract contract = employee.getContract();
         
